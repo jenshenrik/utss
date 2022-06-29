@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(PolygonCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SetActiveWeaponEvent))]
+[RequireComponent(typeof(ActiveWeapon))]
 [DisallowMultipleComponent]
 #endregion REQUIRE COMPONENTS
 
@@ -37,6 +40,10 @@ public class Player : MonoBehaviour
     [HideInInspector] public AimWeaponEvent aimWeaponEvent;
     [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public SetActiveWeaponEvent setActiveWeaponEvent;
+    [HideInInspector] public ActiveWeapon activeWeapon;
+
+    public List<Weapon> weaponList = new List<Weapon>();
 
     private void Awake()
     {
@@ -48,6 +55,8 @@ public class Player : MonoBehaviour
         aimWeaponEvent = GetComponent<AimWeaponEvent>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        setActiveWeaponEvent = GetComponent<SetActiveWeaponEvent>();
+        activeWeapon = GetComponent<ActiveWeapon>();
     }
 
 
@@ -58,8 +67,39 @@ public class Player : MonoBehaviour
     {
         this.playerDetails = playerDetails;
 
+        CreatePlayerStartingWeapons();
+
         // Set player starting health
         SetPlayerHealth();
+    }
+
+    private void CreatePlayerStartingWeapons()
+    {
+        weaponList.Clear();
+
+        foreach (var weaponDetailsSO in playerDetails.startingWeaponList)
+        {
+            AddWeaponToPlayer(weaponDetailsSO);
+        }
+    }
+
+    public Weapon AddWeaponToPlayer(WeaponDetailsSO weaponDetailsSO)
+    {
+        var weapon = new Weapon
+        {
+            weaponDetails = weaponDetailsSO,
+            weaponReloadTimer = 0f,
+            weaponClipRemainingAmmo = weaponDetailsSO.weaponClipAmmoCapacity,
+            weaponRemainingAmmo = weaponDetailsSO.weaponAmmoCapacity,
+            isWeaponReloading = false
+        };
+
+        weaponList.Add(weapon);
+        weapon.weaponListPosition = weaponList.Count;
+
+        setActiveWeaponEvent.CallSetActiveWeaponEvent(weapon);
+
+        return weapon;
     }
 
     /// <summary>
