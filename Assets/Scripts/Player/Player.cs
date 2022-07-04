@@ -8,55 +8,62 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(AimWeaponEvent))]
 [RequireComponent(typeof(AnimatePlayer))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(FireWeapon))]
+[RequireComponent(typeof(FireWeaponEvent))]
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(PlayerControl))]
+[RequireComponent(typeof(IdleEvent))]
+[RequireComponent(typeof(Idle))]
 [RequireComponent(typeof(MovementByVelocityEvent))]
 [RequireComponent(typeof(MovementByVelocity))]
 [RequireComponent(typeof(MovementToPositionEvent))]
 [RequireComponent(typeof(MovementToPosition))]
-[RequireComponent(typeof(IdleEvent))]
-[RequireComponent(typeof(Idle))]
-[RequireComponent(typeof(SortingGroup))]
-[RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(PlayerControl))]
 [RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(ReloadWeapon))]
+[RequireComponent(typeof(ReloadWeaponEvent))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SetActiveWeaponEvent))]
-[RequireComponent(typeof(FireWeapon))]
-[RequireComponent(typeof(FireWeaponEvent))]
+[RequireComponent(typeof(SortingGroup))]
+[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(WeaponFiredEvent))]
+[RequireComponent(typeof(WeaponReloadedEvent))]
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
-    [HideInInspector] public PlayerDetailsSO playerDetails;
+    [HideInInspector] public ActiveWeapon activeWeapon;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public AimWeaponEvent aimWeaponEvent;
+    [HideInInspector] public FireWeaponEvent fireWeaponEvent;
     [HideInInspector] public Health health;
+    [HideInInspector] public IdleEvent idleEvent;
     [HideInInspector] public MovementByVelocityEvent movementByVelocityEvent;
     [HideInInspector] public MovementToPositionEvent movementToPositionEvent;
-    [HideInInspector] public IdleEvent idleEvent;
-    [HideInInspector] public AimWeaponEvent aimWeaponEvent;
-    [HideInInspector] public SpriteRenderer spriteRenderer;
-    [HideInInspector] public Animator animator;
+    [HideInInspector] public PlayerDetailsSO playerDetails;
+    [HideInInspector] public ReloadWeaponEvent reloadWeaponEvent;
     [HideInInspector] public SetActiveWeaponEvent setActiveWeaponEvent;
-    [HideInInspector] public ActiveWeapon activeWeapon;
-    [HideInInspector] public FireWeaponEvent fireWeaponEvent;
+    [HideInInspector] public SpriteRenderer spriteRenderer;
     [HideInInspector] public WeaponFiredEvent weaponFiredEvent;
+    [HideInInspector] public WeaponReloadedEvent weaponReloadedEvent;
 
     public List<Weapon> weaponList = new List<Weapon>();
 
     private void Awake()
     {
         // Load components
+        activeWeapon = GetComponent<ActiveWeapon>();
+        aimWeaponEvent = GetComponent<AimWeaponEvent>();
+        animator = GetComponent<Animator>();
+        fireWeaponEvent = GetComponent<FireWeaponEvent>();
         health = GetComponent<Health>();
+        idleEvent = GetComponent<IdleEvent>();
         movementByVelocityEvent = GetComponent<MovementByVelocityEvent>();
         movementToPositionEvent = GetComponent<MovementToPositionEvent>();
-        idleEvent = GetComponent<IdleEvent>();
-        aimWeaponEvent = GetComponent<AimWeaponEvent>();
+        reloadWeaponEvent = GetComponent<ReloadWeaponEvent>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        animator = GetComponent<Animator>();
         setActiveWeaponEvent = GetComponent<SetActiveWeaponEvent>();
-        activeWeapon = GetComponent<ActiveWeapon>();
-        fireWeaponEvent = GetComponent<FireWeaponEvent>();
         weaponFiredEvent = GetComponent<WeaponFiredEvent>();
+        weaponReloadedEvent = GetComponent<WeaponReloadedEvent>();
     }
 
 
