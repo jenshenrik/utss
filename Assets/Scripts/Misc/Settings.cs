@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class Settings
@@ -49,5 +47,9 @@ public static class Settings
 
     #region FIRING CONTROL
     public const float useAimAngleDistance = 3.5f; // if the target distance is less than this then the aim angle will be used (calculated from player), else the weapon aim angle will be used (calculated from the weapon). 
+    #endregion
+
+    #region UI PARAMETERS
+    public const float uiAmmoIconSpacing = 4f;
     #endregion
 }
