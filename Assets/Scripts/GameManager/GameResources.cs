@@ -33,6 +33,9 @@ public class GameResources : MonoBehaviour
     [Tooltip("Populate with the sounds master mixer group")]
     public AudioMixerGroup soundsMasterMixerGroup;
 
+    [Tooltip("Door open close sound effect")]
+    public SoundEffectSO doorOpenCliseSoundEffect;
+
     [Space(10)]
     [Header("MATERIALS")]
     [Tooltip("Dimmed Material")]
@@ -60,6 +63,7 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(dimmedMaterial), dimmedMaterial);
         HelperUtilities.ValidateCheckNullValue(this, nameof(variableLitShader), variableLitShader);
         HelperUtilities.ValidateCheckNullValue(this, nameof(ammoIconPrefab), ammoIconPrefab);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(doorOpenCliseSoundEffect), doorOpenCliseSoundEffect);
     }
 
 #endif
