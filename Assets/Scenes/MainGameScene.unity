@@ -578,13 +578,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolArray:
   - poolSize: 30
-    prefab: {fileID: 3704831762367981905, guid: 81751cb48351f4e4b8ce62c264add7f8, type: 3}
-    componentType: IFireable
-  - poolSize: 30
     prefab: {fileID: 3704831762367981905, guid: f99a13597127e4a4aa1b3541f673f5bf, type: 3}
     componentType: IFireable
   - poolSize: 30
+    prefab: {fileID: 3704831762367981905, guid: 81751cb48351f4e4b8ce62c264add7f8, type: 3}
+    componentType: IFireable
+  - poolSize: 30
     prefab: {fileID: 3704831762367981905, guid: a214ff8ee4721464286411772e98f157, type: 3}
+    componentType: IFireable
+  - poolSize: 10
+    prefab: {fileID: 3704831762367981905, guid: 2822cd105af55204b94fb746c3610e3b, type: 3}
     componentType: IFireable
 --- !u!4 &257876847
 Transform:
