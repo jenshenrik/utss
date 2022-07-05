@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameResources : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class GameResources : MonoBehaviour
     [Tooltip("The current player scriptable object - this is used to reference the current player between scenes")]
     public CurrentPlayerSO currentPlayer;
 
+    [Space(10)]
+    [Header("SOUNDS")]
+    [Tooltip("Populate with the sounds master mixer group")]
+    public AudioMixerGroup soundsMasterMixerGroup;
 
     [Space(10)]
     [Header("MATERIALS")]

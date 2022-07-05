@@ -97,9 +97,14 @@ public static class HelperUtilities
         }
 
         return aimDirection;
-
     }
 
+    public static float LinearToDecibels(int linear)
+    {
+        var linearScaleRange = 20f;
+
+        return Mathf.Log10((float)linear / linearScaleRange) * 20f;
+    }
 
     /// <summary>
     /// Empty string debug check
