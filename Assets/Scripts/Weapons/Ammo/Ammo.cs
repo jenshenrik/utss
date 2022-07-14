@@ -3,9 +3,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Ammo : MonoBehaviour, IFireable
 {
-    #region Tooltip
     [Tooltip("Populate with child TrailRenderer component")]
-    #endregion Tooltip
     [SerializeField] private TrailRenderer trailRenderer;
 
     private float ammoRange = 0f; // the range of each ammo
@@ -55,7 +53,24 @@ public class Ammo : MonoBehaviour, IFireable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AmmoHitEffect();
         DisableAmmo();
+    }
+
+    private void AmmoHitEffect()
+    {
+        if (ammoDetails.ammoHitEffect != null && ammoDetails.ammoHitEffect.ammoHitEffectPrefab != null)
+        {
+            var ammoHitEffect = (AmmoHitEffect)PoolManager.Instance.ReuseComponent(
+                ammoDetails.ammoHitEffect.ammoHitEffectPrefab,
+                transform.position,
+                Quaternion.identity
+            );
+
+            ammoHitEffect.SetHitEffect(ammoDetails.ammoHitEffect);
+
+            ammoHitEffect.gameObject.SetActive(true);
+        }
     }
 
     /// <summary>
