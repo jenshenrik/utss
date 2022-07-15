@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330c430f24addbd4b9f23f9b342bd502, type: 3}
+  m_Name: EnemyDetails_SlimeBlockKing_Blue_MP7
+  m_EditorClassIdentifier: 
+  enemyName: Slime Block King Blue
+  enemyPrefab: {fileID: 7027693690270223812, guid: 8e02e5b28be3f574b8bf7b8da472932f, type: 3}
