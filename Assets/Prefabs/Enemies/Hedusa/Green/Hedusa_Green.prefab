@@ -119,6 +119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hedusa_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 6256087410561491463, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 19b6ff9fbadc74e479b63068d33eb245, type: 2}
     - target: {fileID: 8831229448915809704, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grimonk_Brown
       objectReference: {fileID: 0}
+    - target: {fileID: 6256087410561491463, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 944ecbb1810696b4a8a6781ac1e002a5, type: 2}
     - target: {fileID: 7432449572651790945, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
       propertyPath: m_Size.x
       value: 0.25
