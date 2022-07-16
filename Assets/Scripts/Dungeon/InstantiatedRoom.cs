@@ -70,7 +70,7 @@ public class InstantiatedRoom : MonoBehaviour
 
         BlockOffUnusedDoorWays();
 
-        AddObstacles();
+        AddObstaclesAndPreferredPaths();
 
         AddDoorsToRooms();
 
@@ -78,7 +78,7 @@ public class InstantiatedRoom : MonoBehaviour
 
     }
 
-    private void AddObstacles()
+    private void AddObstaclesAndPreferredPaths()
     {
         var roomWidth = room.templateUpperBounds.x - room.templateLowerBounds.x + 1;
         var roomHeight = room.templateUpperBounds.y - room.templateLowerBounds.y + 1;
@@ -93,6 +93,12 @@ public class InstantiatedRoom : MonoBehaviour
 
                 // Add obstacles for collision tiles the enemy cannot walk on
                 var tile = collisionTilemap.GetTile(new Vector3Int(x + room.templateLowerBounds.x, y + room.templateLowerBounds.y, 0));
+
+                if (tile == GameResources.Instance.preferredEnemyPathTile)
+                {
+                    aStarMovementPenalty[x, y] = Settings.preferredPathAStarMovementPenalty;
+                    continue;
+                }
 
                 // Check if tile is one of the collision tiles defined in Game Resources
                 foreach (var collisionTile in GameResources.Instance.enemyUnwalkableCollisionTilesArray)
