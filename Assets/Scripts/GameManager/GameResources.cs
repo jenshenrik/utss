@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Tilemaps;
 
 public class GameResources : MonoBehaviour
 {
@@ -48,6 +49,14 @@ public class GameResources : MonoBehaviour
     public Shader variableLitShader;
 
     [Space(10)]
+    [Header("SPECIAL TILEMAP TILES")]
+    [Tooltip("Collision tiles that the enemies cannot navigate to")]
+    public TileBase[] enemyUnwalkableCollisionTilesArray;
+
+    [Tooltip("Preferred path tile for enemy navigation")]
+    public TileBase preferredEnemyPathTile;
+
+    [Space(10)]
     [Header("UI")]
     [Tooltip("Populate with ammo icon prefab")]
     public GameObject ammoIconPrefab;
@@ -64,6 +73,8 @@ public class GameResources : MonoBehaviour
         HelperUtilities.ValidateCheckNullValue(this, nameof(variableLitShader), variableLitShader);
         HelperUtilities.ValidateCheckNullValue(this, nameof(ammoIconPrefab), ammoIconPrefab);
         HelperUtilities.ValidateCheckNullValue(this, nameof(doorOpenCliseSoundEffect), doorOpenCliseSoundEffect);
+        HelperUtilities.ValidateCheckEnumerableValues(this, nameof(enemyUnwalkableCollisionTilesArray), enemyUnwalkableCollisionTilesArray);
+        HelperUtilities.ValidateCheckNullValue(this, nameof(preferredEnemyPathTile), preferredEnemyPathTile);
     }
 
 #endif
