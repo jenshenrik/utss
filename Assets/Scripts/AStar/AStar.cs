@@ -113,8 +113,14 @@ public static class AStar
 
                 if (validNeighbourNode != null)
                 {
+                    // Get the movement penalty
+                    // Unwalkable paths have a penalty of 0. Default movement penalty is set in
+                    // Settings and applies to other grid squares
+                    var movementPenaltyForGridSpace = instantiatedRoom.aStarMovementPenalty[validNeighbourNode.gridPosition.x,
+                        validNeighbourNode.gridPosition.y];
+
                     // Calculate new G cost for neighbour
-                    var newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, validNeighbourNode);
+                    var newCostToNeighbour = currentNode.gCost + GetDistance(currentNode, validNeighbourNode) + movementPenaltyForGridSpace;
 
                     // Check if neighbour is in the open list
                     var isValidNeighbourInOpenList = openNodeList.Contains(validNeighbourNode);
@@ -150,8 +156,10 @@ public static class AStar
 
         var neighbourNode = gridNodes.GetGridNode(neighbourNodeXPosition, neighbourNodeYPosition);
 
-        // Node is not valid if it is in the closed list
-        if (closedNodeList.Contains(neighbourNode))
+        var movementPenaltyForGridSpace = instantiatedRoom.aStarMovementPenalty[neighbourNodeXPosition, neighbourNodeYPosition];
+
+        // Node is not valid if it is in the closed list or is an obstacle (penalty = 0)
+        if (movementPenaltyForGridSpace == 0 || closedNodeList.Contains(neighbourNode))
         {
             return null;
         }

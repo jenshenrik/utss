@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -7,15 +6,35 @@ using UnityEngine.Tilemaps;
 [RequireComponent(typeof(BoxCollider2D))]
 public class InstantiatedRoom : MonoBehaviour
 {
-    [HideInInspector] public Room room;
-    [HideInInspector] public Grid grid;
-    [HideInInspector] public Tilemap groundTilemap;
-    [HideInInspector] public Tilemap decoration1Tilemap;
-    [HideInInspector] public Tilemap decoration2Tilemap;
-    [HideInInspector] public Tilemap frontTilemap;
-    [HideInInspector] public Tilemap collisionTilemap;
-    [HideInInspector] public Tilemap minimapTilemap;
-    [HideInInspector] public Bounds roomColliderBounds;
+    [HideInInspector]
+    public Room room;
+
+    [HideInInspector]
+    public Grid grid;
+
+    [HideInInspector]
+    public Tilemap groundTilemap;
+
+    [HideInInspector]
+    public Tilemap decoration1Tilemap;
+
+    [HideInInspector]
+    public Tilemap decoration2Tilemap;
+
+    [HideInInspector]
+    public Tilemap frontTilemap;
+
+    [HideInInspector]
+    public Tilemap collisionTilemap;
+
+    [HideInInspector]
+    public Tilemap minimapTilemap;
+
+    [HideInInspector]
+    public int[,] aStarMovementPenalty;
+
+    [HideInInspector]
+    public Bounds roomColliderBounds;
 
     private BoxCollider2D boxCollider2D;
 
@@ -51,10 +70,41 @@ public class InstantiatedRoom : MonoBehaviour
 
         BlockOffUnusedDoorWays();
 
+        AddObstacles();
+
         AddDoorsToRooms();
 
         DisableCollisionTilemapRenderer();
 
+    }
+
+    private void AddObstacles()
+    {
+        var roomWidth = room.templateUpperBounds.x - room.templateLowerBounds.x + 1;
+        var roomHeight = room.templateUpperBounds.y - room.templateLowerBounds.y + 1;
+        aStarMovementPenalty = new int[roomWidth, roomHeight];
+
+        for (int x = 0; x < roomWidth; x++)
+        {
+            for (int y = 0; y < roomHeight; y++)
+            {
+                // Set default movement penalty for grid squares
+                aStarMovementPenalty[x, y] = Settings.defaultAStarMovementPenalty;
+
+                // Add obstacles for collision tiles the enemy cannot walk on
+                var tile = collisionTilemap.GetTile(new Vector3Int(x + room.templateLowerBounds.x, y + room.templateLowerBounds.y, 0));
+
+                // Check if tile is one of the collision tiles defined in Game Resources
+                foreach (var collisionTile in GameResources.Instance.enemyUnwalkableCollisionTilesArray)
+                {
+                    if (collisionTile == tile)
+                    {
+                        aStarMovementPenalty[x, y] = 0;
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
