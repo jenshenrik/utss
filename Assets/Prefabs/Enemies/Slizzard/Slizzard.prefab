@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -4962105368696266709, guid: a8656369a18034244b64a0e94d781de5, type: 3}
+    - target: {fileID: 431897496012572010, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: enemyDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: ce613f32b2ccb45428a5e9be610ded6d, type: 2}
     - target: {fileID: 483875005371919969, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.75
@@ -163,5 +167,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8934669455386652272, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: movementDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: a4844d0009a94c840ab1f6f2bda8f042, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}

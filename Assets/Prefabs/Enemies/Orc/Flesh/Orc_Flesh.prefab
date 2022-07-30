@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.94509804
       objectReference: {fileID: 0}
+    - target: {fileID: 431897496012572010, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: enemyDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: 1df6de09f34575e4d91a36ef94da3a99, type: 2}
     - target: {fileID: 483875005371919969, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2.25
@@ -271,5 +275,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8934669455386652272, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
+      propertyPath: movementDetails
+      value: 
+      objectReference: {fileID: 11400000, guid: af2f4c4c928efb843af652883c327eaa, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af7af02a30c0cd846bf502b89d0af6ed, type: 3}
