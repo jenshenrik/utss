@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class RandomSpawnableObject<T>
@@ -11,7 +10,7 @@ public class RandomSpawnableObject<T>
         public int highBoundaryValue;
     }
 
-    private int ratioValueTotal;
+    private int ratioValueTotal = 0;
     private List<ChanceBoundaries> chanceBoundariesList = new List<ChanceBoundaries>();
     private List<SpawnableObjectsByLevel<T>> spawnableObjectsByLevelList;
 
@@ -47,7 +46,11 @@ public class RandomSpawnableObject<T>
             }
         }
 
-        if (chanceBoundariesList.Count == 0) return default(T);
+        if (chanceBoundariesList.Count == 0)
+        {
+            Debug.Log("no chance boundaries found");
+            return default(T);
+        }
 
         var lookupValue = Random.Range(0, ratioValueTotal);
 
