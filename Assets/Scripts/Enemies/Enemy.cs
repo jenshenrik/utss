@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public IdleEvent idleEvent;
     private CircleCollider2D circleCollider2D;
     private PolygonCollider2D polygonCollider2D;
-    private Animator animator;
+    public Animator animator;
     [HideInInspector]
     private SpriteRenderer[] spriteRendererArray;
 
