@@ -1,38 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
 public class GameManager : SingletonMonobehaviour<GameManager>
 {
-    #region Header DUNGEON LEVELS
-
     [Space(10)]
     [Header("DUNGEON LEVELS")]
 
-    #endregion Header DUNGEON LEVELS
-
-    #region Tooltip
-
     [Tooltip("Populate with the dungeon level scriptable objects")]
+    [SerializeField]
+    private List<DungeonLevelSO> dungeonLevelList;
 
-    #endregion Tooltip
+    [Tooltip("Populate with the starting dungeon level for testing, first level = 0")]
+    [SerializeField]
+    private int currentDungeonLevelListIndex = 0;
 
-    [SerializeField] private List<DungeonLevelSO> dungeonLevelList;
-
-    #region Tooltip
-
-    [Tooltip("Populate with the starting dungeon level for testing , first level = 0")]
-
-    #endregion Tooltip
-
-    [SerializeField] private int currentDungeonLevelListIndex = 0;
     private Room currentRoom;
     private Room previousRoom;
     private PlayerDetailsSO playerDetails;
     private Player player;
 
-    [HideInInspector] public GameState gameState;
+    [HideInInspector]
+    public GameState gameState;
 
     protected override void Awake()
     {
@@ -181,19 +170,17 @@ public class GameManager : SingletonMonobehaviour<GameManager>
         return currentRoom;
     }
 
-
-    #region Validation
+    public DungeonLevelSO GetCurrentDungeonLevel()
+    {
+        return dungeonLevelList[currentDungeonLevelListIndex];
+    }
 
 #if UNITY_EDITOR
-
     private void OnValidate()
     {
         HelperUtilities.ValidateCheckEnumerableValues(this, nameof(dungeonLevelList), dungeonLevelList);
     }
 
 #endif
-
-    #endregion Validation
-
 }
 
