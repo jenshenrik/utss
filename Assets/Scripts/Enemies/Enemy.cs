@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(SortingGroup))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AnimateEnemy))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(PolygonCollider2D))]
@@ -15,7 +17,7 @@ using UnityEngine.Rendering;
 [DisallowMultipleComponent]
 public class Enemy : MonoBehaviour
 {
-    // [HideInInspector]
+    [HideInInspector]
     public EnemyDetailsSO enemyDetails;
     private EnemyMovementAI enemyMovementAI;
     [HideInInspector]
@@ -37,5 +39,17 @@ public class Enemy : MonoBehaviour
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         spriteRendererArray = GetComponentsInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
+    }
+
+    public void EnemyInitialization(EnemyDetailsSO enemyDetails, int enemySpawnNumber, DungeonLevelSO dungeonLevel)
+    {
+        this.enemyDetails = enemyDetails;
+
+        SetEnemyAnimationSpeed();
+    }
+
+    private void SetEnemyAnimationSpeed()
+    {
+        animator.speed = enemyMovementAI.moveSpeed / Settings.baseSpeedForEnemyAnimations;
     }
 }

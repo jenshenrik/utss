@@ -345,4 +345,20 @@ public class InstantiatedRoom : MonoBehaviour
 
     }
 
+    public void LockDoors()
+    {
+        var doorArray = GetComponentsInChildren<Door>();
+
+        foreach (var door in doorArray)
+        {
+            door.LockDoor();
+        }
+
+        DisableRoomCollider();
+    }
+
+    private void DisableRoomCollider()
+    {
+        boxCollider2D.enabled = false;
+    }
 }
