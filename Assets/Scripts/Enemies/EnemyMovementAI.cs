@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +18,8 @@ public class EnemyMovementAI : MonoBehaviour
     [HideInInspector]
     public float moveSpeed;
     private bool chasePlayer = false;
+    [HideInInspector]
+    public int updateFrameNumber = 1;
 
     private void Awake()
     {
@@ -47,6 +48,9 @@ public class EnemyMovementAI : MonoBehaviour
 
         // Do nothing if player out of range
         if (!chasePlayer) return;
+
+        // Only process A* path rebuild on certain frames to spread out the load
+        if (Time.frameCount % Settings.targetFrameRateToSpreadPathfindingOver != updateFrameNumber) return;
 
         // Check cooldown or player moved distance to see if path should be rebuilt
         if (currentEnemyPathRebuild <= 0f || GetDistanceToPlayer() > Settings.playerMoveDistanceToRebuildPath)
@@ -118,6 +122,11 @@ public class EnemyMovementAI : MonoBehaviour
             // If no path was found, go idle
             enemy.idleEvent.CallIdleEvent();
         }
+    }
+
+    public void SetUpdateFrameNumber(int updateFrameNumber)
+    {
+        this.updateFrameNumber = updateFrameNumber;
     }
 
     // Because players can be in collision tile (half collision tiles)
